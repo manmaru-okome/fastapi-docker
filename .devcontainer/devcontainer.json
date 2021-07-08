@@ -25,7 +25,11 @@
         "python.linting.flake8Enabled": true,
         "python.linting.flake8Path": "/usr/local/bin/flake8",
         "python.linting.mypyEnabled": true,
-        "python.linting.mypyPath": "/usr/local/bin/mypy"
+        "python.linting.mypyPath": "/usr/local/bin/mypy",
+        "python.jediEnabled": false,
+        "python.analysis.extraPaths": [
+            "backend"
+        ] 
     },
 
     // Add the IDs of extensions you want installed when the container is created.

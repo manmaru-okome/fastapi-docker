@@ -22,19 +22,19 @@ CMD ["uvicorn", "app:app"]
 
 # ==========================
 FROM ${BASE_IMAGE} as dev
-ENV PYTHONDONTWRITEBYTECODE=1
-ARG USERNAME=vscode
-ARG USER_UID=1000
-ARG USER_GID=${USER_UID}
+
+ARG USERNAME
+ARG USER_UID
+ARG USER_GID
 
 WORKDIR /usr/src/app
 # rootだとコンテナ外からファイル編集できなくなる
 
 COPY pyproject.toml poetry.lock /usr/src/app/
-# COPY pyproject.toml /usr/src/app/
 
-RUN apt-get update && \
-    apt-get install -y git sudo && \
+RUN echo USER_ID=${USER_UID} && \
+    apt-get update && \
+    apt-get install -y git && \
     groupadd --gid ${USER_GID} ${USERNAME} && \
     useradd -s /bin/bash --uid ${USER_UID} -G sudo \
         --gid ${USER_GID} -m ${USERNAME} \
